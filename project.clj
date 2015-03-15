@@ -1,6 +1,6 @@
-(defproject domshot "0.1.0-SNAPSHOT"
-  :description "FIXME: write this!"
-  :url "http://example.com/FIXME"
+(defproject domshot "0.0.1"
+  :description "Take a snapshot of your dom, a domshot"
+  :url "https://github.com/dillonforrest/domshot"
 
   :dependencies [[org.clojure/clojure "1.6.0"]
                  [org.clojure/clojurescript "0.0-2755"]]
