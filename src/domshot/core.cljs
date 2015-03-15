@@ -3,6 +3,7 @@
 
 (enable-console-print!)
 
+
 ;; ---- Node validators ---- ;;
 
 (def invalidators
@@ -15,6 +16,7 @@
 
 (defn add-invalidator [fn]
   (swap! invalidators conj fn))
+
 
 ;; ---- Serializing the dom ---- ;;
 
@@ -38,7 +40,7 @@
       node-map)))
 
 (defn gen-basic-node-map [node]
-  {:node-name (.-nodeName node)
+  {:node-name  (.-nodeName node)
    :attributes (get-attrs node)})
 
 (defn snapshot
