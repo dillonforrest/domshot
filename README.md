@@ -41,6 +41,4 @@ For more info on Cljs compilation, read [Waitin'](http://swannodette.github.io/2
 
 ## License
 
-Copyright © 2014 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
+[MIT](license.txt)
