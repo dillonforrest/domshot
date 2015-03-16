@@ -36,7 +36,7 @@
   [node-map native-node]
   (let [node-types goog.dom/NodeType]
     (condp = (.-nodeType native-node)
-      (.-COMMENT node-types) (assoc node-map :text (.-nodeValue native-node))
+      (.-TEXT node-types) (assoc node-map :text (.-nodeValue native-node))
       node-map)))
 
 (defn gen-basic-node-map [node]
