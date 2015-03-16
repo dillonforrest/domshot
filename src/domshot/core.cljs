@@ -73,13 +73,3 @@
                             (clj->js (for [i (range (count (:children structure)))
                                            :let [child (nth (:children structure) i)]]
                                        (build child))))))))
-
-
-
-;; ---- Testing the api... TODO: delete these and test like a pro, not a noob D: ---- ;;
-
-(add-invalidator #(not= "SCRIPT" (.-nodeName %)))
-
-(.log js/console "snapshot result" (clj->js (snapshot)))
-
-(.log js/console "build result" (build (snapshot)))
