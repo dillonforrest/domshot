@@ -8,13 +8,7 @@ To easily serialize your dom to either send across the wire or to recreate your 
 
 ## Setup
 
-With Leiningen, in your `project.clj` dependencies:
-
-```clojure
-[domshot "0.0.1"]
-```
-
-More setup info on [clojars](https://clojars.org/domshot).
+[![Clojars Project](http://clojars.org/domshot/latest-version.svg)](http://clojars.org/domshot)
 
 ## License
 
