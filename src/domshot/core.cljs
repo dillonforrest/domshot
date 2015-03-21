@@ -4,32 +4,32 @@
 (enable-console-print!)
 
 
-;; ---- Node validators ---- ;;
+;; ---- Qualifiers ---- ;;
 
-(def node-invalidators
+(def node-qualifiers
   "An atom of a list of predicates. Each takes the current node as its only arg.
-  Predicates should return `true` if you want `snapshot` to ignore the node."
+  All predicates should return `true` if you want `snapshot` to include the node."
   (atom ()))
 
 (defn include-node? [node]
-  (not-any? false? (map #(% node) @node-invalidators)))
+  (not-any? false? (map #(% node) @node-qualifiers)))
 
-(def attr-invalidators
+(def attr-qualifiers
   "An atom of a list of predicates. Each takes an attr name and val as its
-  args. Predicates should return `true` if you want `snapshot` to ignore the
+  args. All predicates should return `true` if you want `snapshot` to include the
   attr name-val pair."
   (atom ()))
 
 (defn include-attr? [name val]
-  (not-any? false? (map #(% name val) @attr-invalidators)))
+  (not-any? false? (map #(% name val) @attr-qualifiers)))
 
-(defmulti add-invalidator (fn [_ invalidator-type] invalidator-type))
+(defmulti add-qualifier (fn [_ qualifier-type] qualifier-type))
 
-(defmethod add-invalidator :attribute [fn]
-  (swap! attr-invalidators conj fn))
+(defmethod add-qualifier :attribute [fn]
+  (swap! attr-qualifiers conj fn))
 
-(defmethod add-invalidator :default [fn]
-  (swap! attr-invalidators conj fn))
+(defmethod add-qualifier :default [fn]
+  (swap! attr-qualifiers conj fn))
 
 
 ;; ---- Serializing the dom ---- ;;
