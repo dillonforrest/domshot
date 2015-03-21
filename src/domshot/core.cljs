@@ -6,16 +6,30 @@
 
 ;; ---- Node validators ---- ;;
 
-(def invalidators
+(def node-invalidators
   "An atom of a list of predicates. Each takes the current node as its only arg.
   Predicates should return `true` if you want `snapshot` to ignore the node."
   (atom ()))
 
 (defn include-node? [node]
-  (not-any? false? (map #(% node) @invalidators)))
+  (not-any? false? (map #(% node) @node-invalidators)))
 
-(defn add-invalidator [fn]
-  (swap! invalidators conj fn))
+(def attr-invalidators
+  "An atom of a list of predicates. Each takes an attr name and val as its
+  args. Predicates should return `true` if you want `snapshot` to ignore the
+  attr name-val pair."
+  (atom ()))
+
+(defn include-attr? [name val]
+  (not-any? false? (map #(% name val) @attr-invalidators)))
+
+(defmulti add-invalidator (fn [_ invalidator-type] invalidator-type))
+
+(defmethod add-invalidator :attribute [fn]
+  (swap! attr-invalidators conj fn))
+
+(defmethod add-invalidator :default [fn]
+  (swap! attr-invalidators conj fn))
 
 
 ;; ---- Serializing the dom ---- ;;
@@ -27,7 +41,8 @@
             (for [i (range (.-length attrs))
                   :let [attr  (aget attrs i)
                         name  (.-name attr)
-                        value (.-value attr)]]
+                        value (.-value attr)]
+                  :when (include-attr? name value)]
               [name value])))
     {}))
 
