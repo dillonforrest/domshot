@@ -1,4 +1,4 @@
-(defproject domshot "0.2.0"
+(defproject domshot "0.2.1"
   :description "Take a snapshot of your dom, a domshot"
   :url "https://github.com/dillonforrest/domshot"
   :license {:name "MIT"
