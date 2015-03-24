@@ -89,3 +89,18 @@
                             (clj->js (for [i (range (count (:children structure)))
                                            :let [child (nth (:children structure) i)]]
                                        (build child))))))))
+
+
+;; ---- Testing ---- TODO: delete this! ---- ;;
+
+(defn is-not-style [name _]
+  (not= "style" name))
+
+(defn is-not-empty-text [node]
+  (println "node" node)
+  true)
+
+(add-qualifier is-not-style :attribute)
+(add-qualifier is-not-empty-text)
+
+(println (snapshot (goog.dom/getElement "outer")))
